@@ -11,11 +11,15 @@ Vagrant.configure("2") do |config|
 	config.vm.provider "virtualbox" do |vb|
 		vb.name = "OSGP Development"
 		vb.gui = true
-		vb.cpus = "2"
-		vb.memory = "8192"
+		vb.cpus = "8"
+		vb.memory = "16384"
 
 		# Disable 3d acceleration because some programs crash on it.
 		vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+
+        	# Allow full screen
+        	vb.customize ["modifyvm", :id, "--vram", "82"]
+        	vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
 
 		# Enabling copy/paste to/from VM
         	vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -31,7 +35,7 @@ Vagrant.configure("2") do |config|
 		# Clone config repo for user Vagrant
 		apt-get -o DPkg::Options::=--force-confdef install -y git;
 		su vagrant -c "mkdir -p ~/repos/OSGP";
-		su vagrant -c "git clone -b "development" https://github.com/OSGP/Config.git ~/repos/OSGP/Config 2>&1";
+		su vagrant -c "git clone -b "release-5.26.0" https://github.com/PiotrBzdrega/Config.git ~/repos/OSGP/Config 2>&1";
 
 		# Install puppet
 		su vagrant -c "/home/vagrant/repos/OSGP/Config/puppet/install-puppet.sh";
