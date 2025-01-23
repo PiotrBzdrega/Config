@@ -58,7 +58,7 @@ node 'dev-box' {
 	}
 
 	exec { 'install m2e connector for build-helper-maven-plugin plugin':
-		command => '/home/dev/Tools/eclipse/eclipse -application org.eclipse.equinox.p2.director -nosplash -repository https://repository.sonatype.org/content/repositories/forge-sites/m2e-extras/0.15.0/N/0.15.0.201206251206/ -installIUs org.sonatype.m2e.buildhelper',
+		command => '/home/dev/Tools/eclipse/eclipse -application org.eclipse.equinox.p2.director -nosplash -repository https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-buildhelper/0.15.0/N/0.15.0.201207090124/ -installIUs org.sonatype.m2e.buildhelper',
 		require => File['create eclipse link']
 	}
 
